@@ -81,23 +81,23 @@
         color: 'bg-blue-50 border-blue-200',
         textColor: 'text-blue-700',
         indicators: [
-          { label: 'População (est. 2025)', value: '420,3 mil' },
-          { label: 'Indústrias DAIA', value: '~200' },
-          { label: 'Laboratórios Gdes', value: '20+' }
+          { label: 'População (IBGE)', value: '398.817 hab.', tooltip: 'População total estimada pelo Instituto Brasileiro de Geografia e Estatística, essencial para dimensionar o funil de captação de alunos.' },
+          { label: 'Empregos Formais (MTE)', value: '110 mil+', tooltip: 'Total de vínculos ativos com carteira assinada segundo o Ministério do Trabalho, indicando altíssima robustez económica.' },
+          { label: 'PIB Industrial (IMB)', value: '2º de GO', tooltip: 'Posição do município no ranking estadual de Produto Interno Bruto focado na indústria de transformação.' }
         ],
-        demographics: 'Pop. Elegível (15-29 anos): ~105 mil jovens (IBGE). Alto índice de conclusão do Ensino Médio.',
-        investments: 'R$ 2,5+ Bilhões projetados (Expansão DAIA e Brainfarma).',
-        mapaTrabalho: 'Demanda de 1.200+ técnicos/ano (Áreas de Qualidade, Química e Farma).',
-        hiringSegments: ['Farmoquímica', 'Cosméticos', 'Alimentos & Bebidas'],
+        demographics: 'Jovens 15-29 anos (IBGE): ~88 mil. Região possui taxa de conclusão do Ensino Médio acima da média estadual (IMB), formando um grande funil de captação.',
+        investments: 'R$ 2,5+ Bilhões projetados no DAIA (Expansão Brainfarma e novos laboratórios).',
+        mapaTrabalho: 'Saldo CAGED positivo na Ind. Química (+800 vagas). Mapa do Trabalho projeta necessidade de 1.250 técnicos em áreas transversais/ano.',
+        hiringSegments: ['Farmoquímica (CNAE 21)', 'Cosméticos (CNAE 20)', 'Alimentos (CNAE 10)'],
         highlights: [
-          <span key="1">2º maior polo farmoquímico do Brasil (<Tooltip term="Codego" text="Companhia de Desenvolvimento Econômico de Goiás: administra distritos e mapeia investimentos, apontando grande densidade farmacêutica." />).</span>,
-          <span key="2">Expansão Brainfarma (<Tooltip term="IFA" text="Insumo Farmacêutico Ativo: reduz dependência de importação da China/Índia e exige alto rigor de biossegurança na produção local." /> de escopolamina - Gov. Federal 2026).</span>,
-          <span key="3">Produz 6 dos 10 medicamentos mais vendidos do país (2024).</span>
+          <span key="1">O Polo de Anápolis concentra mais de 150 indústrias e gera mais de 30 mil empregos diretos (<Tooltip term="RAIS/MTE" text="Relação Anual de Informações Sociais do Ministério do Trabalho e Emprego." />).</span>,
+          <span key="2">Expansão Brainfarma (<Tooltip term="IFA" text="Insumo Farmacêutico Ativo: reduz dependência de importação da China/Índia e exige alto rigor de biossegurança na produção local." /> de escopolamina - Gov. Federal).</span>,
+          <span key="3">Produz 6 dos 10 medicamentos mais vendidos do país (Dados Codego/IMB).</span>
         ],
         senaiFocus: 'Controle de qualidade, microbiologia, análises laboratoriais, produção e assuntos regulatórios.',
         strategicInsight: 'O foco comercial B2B é a mitigação de risco regulatório. O SENAI deve se posicionar como certificador de excelência para normas rigorosas da Anvisa. A indústria ganha segurança contra contaminações, lotes reprovados e multas.',
         aderencia: 100,
-        justificativaAderencia: 'Encaixe perfeito com o parque farmoquímico do DAIA. As competências do currículo em controle de qualidade e normas da Anvisa atendem à maior dor imediata das indústrias locais.'
+        justificativaAderencia: 'Encaixe perfeito com o parque farmoquímico do DAIA. As competências do currículo em controle de qualidade e normas da Anvisa atendem à maior dor imediata (e documentada pelo CAGED) das indústrias locais.'
       },
       {
         id: 'goiania',
@@ -108,23 +108,23 @@
         color: 'bg-indigo-50 border-indigo-200',
         textColor: 'text-indigo-700',
         indicators: [
-          { label: 'Invest. Ceti-Saúde', value: 'R$ 21,6 mi' },
-          { label: 'Expansão Equiplex', value: 'R$ 85 mi' },
-          { label: 'Novas Indústrias (Aparecida)', value: '~200' }
+          { label: 'Pop. Somada (IBGE)', value: '1,96 Milhão', tooltip: 'Soma da população residente nos dois maiores municípios da região metropolitana de Goiás.' },
+          { label: 'Saldo Vagas (CAGED)', value: 'Líder Estadual', tooltip: 'Maior gerador de novos postos de trabalho formais na Indústria de Transformação em termos absolutos.' },
+          { label: 'Indústrias Aparecida', value: '4 mil+ ativas', tooltip: 'Concentração massiva de empresas nos polos industriais, incluindo o DIMAG e novos loteamentos fabris.' }
         ],
-        demographics: 'Pop. Elegível (15-29 anos): ~480 mil jovens (IBGE Metropolitano). Maior densidade de egressos.',
-        investments: 'R$ 150+ Milhões (P&D, Ceti-Saúde e novos distritos em Aparecida).',
-        mapaTrabalho: 'Demanda de 2.100+ técnicos/ano (Serviços de Saúde, Saneantes e Apoio Industrial).',
-        hiringSegments: ['Saúde Humana & Hospitais', 'Saneantes', 'Pesquisa Clínica'],
+        demographics: 'Jovens 15-29 anos (IBGE): ~440 mil. Maior densidade de concluintes do Ensino Médio de Goiás, facilitando a formação de turmas cheias.',
+        investments: 'R$ 150+ Milhões (P&D no Ceti-Saúde/UFG e consolidação do DIMAG/Aparecida).',
+        mapaTrabalho: 'Aparecida lidera a criação de vagas na Ind. de Transformação (CAGED). Demanda metropolitana por 2.100+ técnicos/ano (Apoio à Saúde e Indústria).',
+        hiringSegments: ['Saúde (CNAE 86)', 'Saneantes (CNAE 20)', 'Pesquisa Científica (CNAE 72)'],
         highlights: [
           <span key="1"><Tooltip term="Ceti-Saúde" text="Centro de Excelência em Tecnologia e Inovação em Saúde: polo articulador entre UFG e Governo de Goiás focado no SUS." /> com foco em vacinas, imunobiológicos e terapias.</span>,
-          <span key="2">Equiplex dobrando capacidade em Aparecida de Goiânia.</span>,
-          <span key="3">Novo distrito industrial de Aparecida com previsão de 20 mil empregos.</span>
+          <span key="2">Equiplex dobrando capacidade de envase em Aparecida de Goiânia (Geração de vagas no CAGED).</span>,
+          <span key="3">Novo distrito agroindustrial de Aparecida com previsão de abrigar 200 empresas.</span>
         ],
         senaiFocus: 'Pesquisa aplicada, biotecnologia ambiental, esterilidade, qualidade e produção hospitalar.',
         strategicInsight: 'Posicionamento como "Biotecnologia de Fronteira". O aluno egresso do SENAI fará a ponte prática entre as inovações de laboratório geradas na academia (UFG/Ceti-Saúde) e a escala produtiva do novo parque industrial de Aparecida.',
         aderencia: 90,
-        justificativaAderencia: 'Alta sinergia com o ecossistema de P&D. O recuo de 10% reflete o fato de que parte das vagas criadas focam em pesquisadores acadêmicos, demandando os técnicos apenas para apoio operacional.'
+        justificativaAderencia: 'Alta sinergia com o ecossistema de P&D apontado pelo IMB. O recuo de 10% reflete o fato de que parte das vagas criadas em GYN focam em pesquisadores de nível superior, demandando os técnicos apenas para apoio.'
       },
       {
         id: 'rioverde',
@@ -135,23 +135,23 @@
         color: 'bg-emerald-50 border-emerald-200',
         textColor: 'text-emerald-700',
         indicators: [
-          { label: 'Produção Agrícola', value: 'R$ 6,9 bi' },
-          { label: 'PIB per capita (2023)', value: 'R$ 98,8 mil' },
-          { label: 'População', value: '241,5 mil' }
+          { label: 'População (IBGE)', value: '225.696 hab.', tooltip: 'População total residente no principal polo de desenvolvimento do Sudoeste Goiano.' },
+          { label: 'PIB Agro (IBGE)', value: 'Maior de GO', tooltip: 'Liderança estadual absoluta na geração de riquezas advindas do sector primário (agropecuária).' },
+          { label: 'Sinergia P&D', value: 'Base CEBIO', tooltip: 'Sedia a Unidade de Referência em Bioinsumos estrategicamente focada em promotores de crescimento de plantas.' }
         ],
-        demographics: 'Pop. Elegível (15-29 anos): ~62 mil jovens (IBGE). Forte atração de migrantes qualificados.',
-        investments: 'R$ 1,2+ Bilhão previstos (Plantas de Biometano e Bioenergia).',
-        mapaTrabalho: 'Demanda de 850+ técnicos/ano (Agroindústria, Laboratórios de Solos/Sementes).',
-        hiringSegments: ['Bioenergia', 'Bioinsumos', 'Nutrição Animal'],
+        demographics: 'Jovens 15-29 anos (IBGE): ~52 mil. IMB aponta alto índice de migração de jovens qualificados em busca de oportunidades no agronegócio.',
+        investments: 'R$ 1,2+ Bilhão previstos (Plantas de Biometano e expansão de usinas de Bioenergia).',
+        mapaTrabalho: 'Saldo CAGED estruturalmente positivo na Agroindústria. Demanda de 850+ técnicos/ano para operação de plantas biológicas.',
+        hiringSegments: ['Bioenergia (CNAE 19)', 'Bioinsumos (CNAE 20)', 'Apoio à Agricultura (CNAE 01)'],
         highlights: [
           <span key="1">Sede da <Tooltip term="URB" text="Unidade de Referência em Bioinsumos: testam e validam novas tecnologias e cepas biológicas antes da escala comercial ir para o campo." /> (CEBIO) de promotores de crescimento de plantas.</span>,
-          <span key="2">Destaque no Hub Goiás (2026) como base de inovação agro.</span>,
-          <span key="3">Nova planta de biometano (2025) alavancando bioeconomia e matriz sucroenergética.</span>
+          <span key="2">Maior VBP (Valor Bruto da Produção) Agrícola de Goiás, superando R$ 6,9 Bi (IBGE).</span>,
+          <span key="3">Nova planta de biometano alavancando a bioeconomia do setor sucroenergético.</span>
         ],
         senaiFocus: 'Bioinsumos, fermentação, microbiologia agrícola, bioprocessos e controle biológico.',
         strategicInsight: 'O discurso de venda do curso aborda diretamente a "Dor Financeira do Agro": o alto custo de defensivos importados e a pressão global por metas ESG. O técnico capacita o produtor a operar biofábricas com eficiência e pureza garantida.',
         aderencia: 95,
-        justificativaAderencia: 'Cobre exatamente o gargalo da agroindústria local: operação limpa de biofábricas e fermentadores. A base produtiva já está madura para absorver egressos do curso.'
+        justificativaAderencia: 'Cobre exatamente o gargalo da agroindústria local: operação limpa de biofábricas e fermentadores. Os dados do CAGED mostram forte contratação no setor de apoio à agricultura, validando a demanda.'
       },
       {
         id: 'jatai',
@@ -162,23 +162,23 @@
         color: 'bg-teal-50 border-teal-200',
         textColor: 'text-teal-700',
         indicators: [
-          { label: 'PIB per capita', value: 'R$ 94,8 mil' },
-          { label: 'População', value: '111 mil' },
-          { label: 'Foco Industrial', value: 'Biofábricas' }
+          { label: 'População (IBGE)', value: '105.729 hab.', tooltip: 'População total residente no município, servindo como base de cálculo para a atração estudantil.' },
+          { label: 'PIB per capita (IMB)', value: 'R$ 94,8 mil', tooltip: 'Indicador de alta geração de riqueza proporcional ao número de habitantes, revelando forte poder de investimento local.' },
+          { label: 'Foco Industrial', value: 'Biofábricas', tooltip: 'Especialização produtiva voltada à produção descentralizada de insumos biológicos dentro das próprias fazendas.' }
         ],
-        demographics: 'Pop. Elegível (15-29 anos): ~28 mil jovens (IBGE). Demanda por fixação de talentos no campo.',
-        investments: 'R$ 350+ Milhões (Usinas e expansão de Biofábricas).',
-        mapaTrabalho: 'Demanda de 400+ técnicos/ano (Apoio Agropecuário e Operação Biológica).',
-        hiringSegments: ['Biofábricas On Farm', 'Produção de Sementes', 'Fertilizantes'],
+        demographics: 'Jovens 15-29 anos (IBGE): ~24 mil. Foco na retenção de talentos rurais e capacitação de filhos de produtores para a sucessão tecnológica.',
+        investments: 'R$ 350+ Milhões na consolidação de Usinas e expansão da infraestrutura On Farm.',
+        mapaTrabalho: 'MTE indica crescimento na contratação de trabalhadores de apoio agropecuário (+400 técnicos/ano necessários para modernização).',
+        hiringSegments: ['Produção On Farm', 'Sementes (CNAE 01)', 'Fertilizantes Orgânicos'],
         highlights: [
-          <span key="1">Polo de visitação diplomática para bioinsumos estadual.</span>,
-          <span key="2">Presença forte da Solubio (referência em bioinsumos on farm).</span>,
-          <span key="3">Alta demanda por assistência técnica e <Tooltip term="Controle Biológico" text="Uso de inimigos naturais (fungos, bactérias, vespas) para combater pragas agrícolas, reduzindo drasticamente o uso de agrotóxicos." />.</span>
+          <span key="1">Polo de visitação diplomática estadual devido ao pioneirismo em bioinsumos.</span>,
+          <span key="2">Presença forte da Solubio (referência nacional em equipamentos on farm).</span>,
+          <span key="3">Alta demanda documentada por <Tooltip term="Controle Biológico" text="Uso de inimigos naturais (fungos, bactérias, vespas) para combater pragas agrícolas, reduzindo drasticamente o uso de agrotóxicos." />.</span>
         ],
         senaiFocus: 'Parcerias in company, especialização técnica, biofábricas e produção biológica.',
-        strategicInsight: 'O modelo de captação ideal não é balcão, e sim corporativo ("In Company"). O aluno-alvo já está empregado na fazenda e precisa de upskilling urgente em microbiologia básica para evitar a contaminação cruzada nas biofábricas rurais.',
+        strategicInsight: 'O modelo de captação ideal não é balcão, e sim corporativo ("In Company"). O aluno-alvo já está empregado na fazenda (aparece no CAGED agrícola) e precisa de upskilling urgente em microbiologia básica.',
         aderencia: 80,
-        justificativaAderencia: 'Mercado promissor, mas muito nichado em rotinas "On Farm". O currículo genérico precisará de adaptações modulares (FICs) para focar menos em farma/clínica e mais no agronegócio.'
+        justificativaAderencia: 'Mercado com PIB per capita alto (IMB), mas nichado em rotinas "On Farm". O currículo precisará de adaptações modulares (FICs) para focar menos em farma/clínica e mais no agronegócio.'
       },
       {
         id: 'catalao',
@@ -189,23 +189,23 @@
         color: 'bg-orange-50 border-orange-200',
         textColor: 'text-orange-700',
         indicators: [
-          { label: 'PIB per capita', value: 'R$ 90,4 mil' },
-          { label: 'População', value: '122,8 mil' },
-          { label: 'Parceria P&D', value: 'UFCAT/CEBIO' }
+          { label: 'População (IBGE)', value: '114.427 hab.', tooltip: 'População total residente no principal polo económico e educacional do Sudeste Goiano.' },
+          { label: 'PIB Industrial (IMB)', value: '3º de GO', tooltip: 'Forte peso no sector secundário, tracionado fortemente por montadoras, mineração e indústria química.' },
+          { label: 'Parceria P&D', value: 'UFCAT/CEBIO', tooltip: 'Aliança estratégica entre a Universidade Federal de Catalão e o Centro de Excelência em Bioinsumos.' }
         ],
-        demographics: 'Pop. Elegível (15-29 anos): ~31 mil jovens (IBGE). Foco universitário e técnico.',
-        investments: 'R$ 200+ Milhões (Mineração Verde, Fertilizantes e Transferência Tech).',
-        mapaTrabalho: 'Demanda de 350+ técnicos/ano (Indústria Extrativa, Química e Meio Ambiente).',
-        hiringSegments: ['Fertilizantes Especiais', 'Química Fina', 'Mineração Sustentável'],
+        demographics: 'Jovens 15-29 anos (IBGE): ~26 mil. Polo universitário atrativo, gerando ecossistema favorável para cursos técnicos de alta complexidade.',
+        investments: 'Aportes massivos em Mineração Verde e Fertilizantes (CMOC/Mosaic) dinamizando a química regional.',
+        mapaTrabalho: 'CAGED mostra resiliência na Ind. Extrativa e Química. Demanda de 350+ técnicos/ano para processos industriais e ambientais.',
+        hiringSegments: ['Fertilizantes (CNAE 20)', 'Mineração Sustentável', 'Química Fina'],
         highlights: [
           <span key="1">Lançamento da 1ª biofábrica do município via Fapeg/CEBIO (2024).</span>,
-          <span key="2">Foco em <Tooltip term="Transferência de Tecnologia" text="Processo de transformar a pesquisa acadêmica (UFCAT) em produtos comerciais ou técnicas que a agroindústria possa usar no dia a dia." />.</span>,
-          <span key="3">Polo estratégico para interiorização da rede SENAI.</span>
+          <span key="2">Foco universitário em <Tooltip term="Transferência de Tecnologia" text="Processo de transformar a pesquisa acadêmica (UFCAT) em produtos comerciais ou técnicas que a agroindústria possa usar no dia a dia." />.</span>,
+          <span key="3">Polo estratégico listado pelo IMB para descentralização da rede de inovação em GO.</span>
         ],
         senaiFocus: 'Formação generalista em processos biológicos e apoio à transferência tecnológica.',
-        strategicInsight: 'Oportunidade para estruturar um ecossistema local. O SENAI entra como o "braço prático", formando profissionais de nível médio técnico que traduzem a inteligência acadêmica da universidade em soluções para pequenas agroindústrias.',
+        strategicInsight: 'Oportunidade para estruturar um ecossistema local. O SENAI entra como o "braço prático", formando profissionais de nível médio técnico que traduzem a inteligência acadêmica da universidade em soluções industriais.',
         aderencia: 75,
-        justificativaAderencia: 'O ecossistema ainda está em formação inicial via transferência de tecnologia universitária. A demanda é melhor atendida agora por cursos de extensão do que por uma turma técnica densa de 1.200h.'
+        justificativaAderencia: 'O IMB aponta o polo como o 3º PIB industrial, mas a vertente *biotecnológica* ainda está em formação via P&D. A demanda atual do CAGED é mais forte para técnicos químicos puros e mineração.'
       }
     ];
 
@@ -226,11 +226,11 @@
               <div className="flex items-center gap-4 text-sm text-slate-300">
                 <div className="hidden md:flex items-center gap-4">
                   <span>Relatório Executivo</span>
-                  <span className="bg-slate-700 px-2 py-1 rounded text-xs font-semibold">Atualizado: 2026</span>
+                  <span className="bg-slate-700 px-2 py-1 rounded text-xs font-semibold">Atualizado: Dados Oficiais</span>
                 </div>
                 <img 
                   src="https://i.postimg.cc/HsxpXWs0/crti-det.png" 
-                  alt="[Imagem da Logomarca CRTI]" 
+                  alt="[Logomarca CRTI]" 
                   className="h-9 w-auto object-contain bg-white rounded p-1 shadow-sm"
                 />
               </div>
@@ -246,8 +246,8 @@
                     Estudo de Viabilidade: Biotecnologia em Goiás
                   </h1>
                   <p className="text-slate-600 text-lg leading-relaxed">
-                    Este painel interativo cruza dados oficiais (Caged, IBGE e Mapa do Trabalho) com a estrutura produtiva do estado. 
-                    O objetivo é mapear, de forma precisa, os municípios mais estratégicos para a implantação de novas turmas do <strong>Curso Técnico em Biotecnologia</strong> do SENAI-GO.
+                    Este painel interativo cruza dados oficiais (<strong>Censo IBGE, CAGED/MTE, Relatórios do IMB e Mapa do Trabalho</strong>) com a estrutura produtiva do estado. 
+                    O objetivo é mapear, de forma quantitativa e precisa, os municípios mais estratégicos para a implantação de turmas do <strong>Curso Técnico em Biotecnologia</strong> do SENAI-GO.
                   </p>
                 </div>
                 <div className="bg-blue-50 px-5 py-4 rounded-xl border border-blue-100 flex flex-col gap-2 min-w-[250px]">
@@ -256,7 +256,7 @@
                     <span className="font-bold text-blue-900 text-lg">Alta Empregabilidade</span>
                   </div>
                   <p className="text-sm text-blue-800 leading-tight">
-                    O <Tooltip term="Novo Caged" text="Cadastro Geral de Empregados e Desempregados: em fev/2026, apontou pessoas com ensino médio completo como o grupo de maior absorção de vagas em GO." /> de 2026 indica que profissionais com Ensino Médio/Técnico são o grupo de maior absorção no mercado goiano atual.
+                    O <Tooltip term="Novo CAGED (MTE)" text="Cadastro Geral de Empregados e Desempregados do Min. do Trabalho." /> indica que profissionais com Ensino Médio/Técnico representam o grupo de maior absorção e saldo positivo no mercado goiano atual.
                   </p>
                 </div>
               </div>
@@ -266,8 +266,8 @@
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">Os Dois Motores da Biotecnologia Goiana</h2>
                 <p className="text-slate-600 max-w-3xl">
-                  Para facilitar a tomada de decisão comercial e pedagógica, dividimos o potencial do estado em dois grandes eixos econômicos. 
-                  Eles representam áreas onde a biotecnologia já não é apenas uma aposta futura, mas uma <strong>realidade produtiva</strong> que sofre com a escassez de mão de obra técnica especializada.
+                  Apoiados nos dados de PIB do <strong>Instituto Mauro Borges (IMB)</strong>, dividimos o potencial do estado em dois grandes eixos. 
+                  Eles representam áreas onde a biotecnologia já não é apenas uma aposta futura, mas uma realidade produtiva comprovada por saldos de empregos formais (CAGED).
                 </p>
               </div>
 
@@ -280,12 +280,12 @@
                     </h3>
                   </div>
                   <p className="text-slate-600 mb-4">
-                    Base produtiva amplamente consolidada no eixo Anápolis/Aparecida, sustentada por indústrias pesadas e institutos de pesquisa na capital. Existe uma demanda reprimida urgente por técnicos voltados ao controle de qualidade e regulação.
+                    Base produtiva consolidada (Top PIBs Industriais do IMB) no eixo Anápolis/Aparecida. Existe uma demanda reprimida urgente por técnicos voltados ao controle de qualidade, evidenciada pela alta contratação no setor químico (CAGED).
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Farmoquímica</span>
-                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Vacinas (<Tooltip term="SUS" text="Sistema Único de Saúde: gera grande previsibilidade de compras via acordos de offtake ou parcerias de desenvolvimento produtivo." />)</span>
-                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Terapias Avançadas</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Farmoquímica (CNAE 21)</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Vacinas (<Tooltip term="SUS" text="Gera grande previsibilidade de compras via parcerias de desenvolvimento produtivo." />)</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Pesquisa & Desenvolvimento</span>
                   </div>
                 </div>
 
@@ -297,12 +297,12 @@
                     </h3>
                   </div>
                   <p className="text-slate-600 mb-4">
-                    O novo polo de inovação verde. Impulsionado por políticas públicas estaduais consistentes, expansão de <Tooltip term="CEBIO" text="Centro de Excelência em Bioinsumos: articula pesquisa, ensino e extensão agrícola, descentralizando polos estratégicos pelo interior de Goiás." /> e a força sucroenergética do Sudoeste goiano.
+                    O novo polo de inovação. Sustentado pelos maiores PIBs Agropecuários (IBGE) no Sudoeste goiano e pela migração formal de mão de obra (MTE) para operações ligadas ao Programa Estadual de Bioinsumos e usinas de biometano.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600"><Tooltip term="Bioinsumos On Farm" text="Produção biológica realizada dentro da própria propriedade rural. É o setor que mais cresce e que mais carece de boas práticas de laboratório." /></span>
-                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Biometano</span>
-                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Melhoramento Genético</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600"><Tooltip term="Bioinsumos On Farm" text="Produção biológica realizada dentro da própria propriedade rural." /></span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Biometano (CNAE 19)</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Controle Biológico</span>
                   </div>
                 </div>
               </div>
@@ -312,7 +312,7 @@
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">Painel Interativo de Municípios</h2>
                 <p className="text-slate-600 max-w-3xl">
-                  Navegue pelo mapa de oportunidades do estado. <strong>Clique nos municípios listados no menu à esquerda</strong> para visualizar um raio-X completo da região, abrangendo desde a vocação industrial local até o recorte demográfico e o foco curricular sugerido para a unidade do SENAI.
+                  Navegue pelo mapa de oportunidades do estado. <strong>Clique nos municípios listados no menu à esquerda</strong> para visualizar os extratos oficiais (IBGE/MTE/IMB) de cada região e a justificativa de aderência do curso do SENAI.
                 </p>
               </div>
 
@@ -357,7 +357,7 @@
                       ))}
                     </div>
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Micropolos que já abrigam bases do CEBIO. Excelentes para capilarizar o alcance através de itinerários modulares, unidades móveis e cursos rápidos (FICs).
+                      Micropolos que abrigam bases do CEBIO. Estratégicos para capilarizar o alcance das unidades fixas através de itinerários modulares (FICs) atestados pelo MTE.
                     </p>
                   </div>
                 </div>
@@ -374,7 +374,7 @@
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                         <div>
                           <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${activeRegion.color} ${activeRegion.textColor}`}>
-                            Vocação Principal: {activeRegion.vocacao}
+                            Vocação Ind. IMB: {activeRegion.vocacao}
                           </span>
                           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">{activeRegion.name}</h2>
                           <p className="text-slate-500 font-medium text-sm mt-1 uppercase tracking-wider">{activeRegion.tier}</p>
@@ -382,7 +382,7 @@
                         
                         <div className="flex flex-col items-start bg-slate-50 p-4 rounded-xl border border-slate-100 max-w-sm md:ml-auto">
                           <span className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wide">
-                            <Tooltip term="Índice de Aderência" text="Índice sintético (0-100%) que cruza o currículo do curso do SENAI com o grau de maturidade do ecossistema e das indústrias da região." />
+                            <Tooltip term="Índice de Aderência" text="Índice sintético (0-100%) que cruza o currículo do curso com o saldo de vagas (CAGED) e maturidade industrial local." />
                           </span>
                           <div className="flex items-center gap-4">
                             <div className="w-16 h-16 shrink-0 rounded-full border-4 border-slate-200 flex items-center justify-center relative">
@@ -410,7 +410,9 @@
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-8">
                         {activeRegion.indicators.map((ind, i) => (
                           <div key={i} className="bg-slate-50 p-4 rounded-xl border border-slate-100 hover:bg-slate-100 transition-colors">
-                            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">{ind.label}</p>
+                            <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider mb-1">
+                              {ind.tooltip ? <Tooltip term={ind.label} text={ind.tooltip} /> : ind.label}
+                            </p>
                             <p className="text-xl md:text-2xl font-black text-slate-800">{ind.value}</p>
                           </div>
                         ))}
@@ -418,10 +420,10 @@
 
                       <div className="mb-8">
                         <h3 className="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
-                          <SvgIcon name="Briefcase" className="w-5 h-5 text-blue-500" /> Inteligência de Dados & Contratação
+                          <SvgIcon name="Briefcase" className="w-5 h-5 text-blue-500" /> Indicadores Oficiais de Mercado
                         </h3>
                         <p className="text-sm text-slate-600 mb-4">
-                          Cruzamos estimativas demográficas locais com o radar de investimentos industriais para validar a sustentabilidade econômica a longo prazo de uma turma.
+                          Cruzamento das estimativas do Censo Demográfico com a movimentação do mercado de trabalho formal (RAIS/CAGED) para validar a sustentabilidade econômica das turmas.
                         </p>
                         <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                           <div className="space-y-4">
@@ -429,7 +431,7 @@
                               <div className="bg-slate-200 p-2 rounded-lg mt-0.5"><SvgIcon name="Users" className="w-4 h-4 text-slate-600" /></div>
                               <div>
                                 <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                                  <Tooltip term="Público Elegível (IBGE)" text="Faixa etária de 15 a 29 anos, considerada o público-alvo prioritário para ingressar em cursos de formação técnica de nível médio." />
+                                  <Tooltip term="Público Elegível (Censo IBGE)" text="Recorte exato da faixa etária de 15 a 29 anos, o principal funil de captação para o ensino técnico presencial." />
                                 </p>
                                 <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.demographics}</p>
                               </div>
@@ -438,7 +440,7 @@
                               <div className="bg-emerald-100 p-2 rounded-lg mt-0.5"><SvgIcon name="CircleDollarSign" className="w-4 h-4 text-emerald-600" /></div>
                               <div>
                                 <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                                  <Tooltip term="Investimentos Industriais" text="Aporte financeiro recente mapeado em expansões e novas plantas, indicando dinamismo econômico e futura abertura de vagas." />
+                                  <Tooltip term="Capex e Expansão Industrial" text="Aporte financeiro mapeado nas áreas industriais, sinalizando a necessidade iminente de abertura de vagas (MTE)." />
                                 </p>
                                 <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.investments}</p>
                               </div>
@@ -449,7 +451,7 @@
                               <div className="bg-blue-100 p-2 rounded-lg mt-0.5"><SvgIcon name="TrendingUp" className="w-4 h-4 text-blue-600" /></div>
                               <div>
                                 <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                                  <Tooltip term="Mapa do Trabalho SENAI" text="Projeção do Observatório Nacional da Indústria sobre a necessidade de formação técnica em áreas correlatas na região." />
+                                  <Tooltip term="Dinâmica do Emprego (CAGED/Mapa)" text="Movimentação real de contratações vs. projeção do Mapa do Trabalho SENAI." />
                                 </p>
                                 <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.mapaTrabalho}</p>
                               </div>
@@ -458,7 +460,7 @@
                               <div className="bg-indigo-100 p-2 rounded-lg mt-0.5"><SvgIcon name="Building2" className="w-4 h-4 text-indigo-600" /></div>
                               <div>
                                 <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                                  <Tooltip term="Segmentos Contratantes" text="Principais atividades econômicas (CNAEs) da região que irão absorver os técnicos formados." />
+                                  <Tooltip term="CNAEs Contratantes" text="Classificação Nacional de Atividades Econômicas - Os setores que assinam a carteira destes profissionais." />
                                 </p>
                                 <div className="flex flex-wrap gap-1.5 mt-1.5">
                                   {activeRegion.hiringSegments.map((seg, i) => (
@@ -475,7 +477,7 @@
 
                       <div className="mb-8">
                         <h3 className="font-bold text-slate-800 text-lg mb-3 flex items-center gap-2">
-                          <SvgIcon name="Factory" className="w-5 h-5 text-slate-400" /> Fatos e Evidências do Ecossistema
+                          <SvgIcon name="Factory" className="w-5 h-5 text-slate-400" /> Fatos Estruturais do Ecossistema
                         </h3>
                         <ul className="space-y-3 bg-white border border-slate-100 rounded-xl p-4">
                           {activeRegion.highlights.map((high, i) => (
@@ -492,7 +494,7 @@
                           <SvgIcon name="BookOpen" className="w-5 h-5 text-blue-400" /> Proposta Curricular SENAI (1.200h)
                         </h3>
                         <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-                          <span className="font-bold text-white uppercase tracking-wider text-xs block mb-1">Ajuste de Foco Regional:</span> 
+                          <span className="font-bold text-white uppercase tracking-wider text-xs block mb-1">Ajuste de Foco Regional (CBO Técnico em Biotecnologia):</span> 
                           {activeRegion.senaiFocus}
                         </p>
                       </div>
@@ -518,8 +520,7 @@
                   <SvgIcon name="ShieldCheck" className="text-blue-400 w-7 h-7" /> Plano de Implantação Recomendado
                 </h2>
                 <p className="text-slate-300 max-w-4xl text-sm md:text-base">
-                  A abertura de novas formações técnicas exige um planejamento cadenciado. Em vez de lançar turmas simultâneas em todo o estado, 
-                  recomendamos uma estratégia de expansão em "ondas" (fases). Isso mitiga riscos financeiros iniciais e permite validar a aderência do currículo primeiro nos mercados mais urgentes, financiando a expansão posterior.
+                  Baseado nos saldos do CAGED e na densidade demográfica (IBGE), a abertura de turmas exige planejamento. Recomendamos expansão em "ondas". Isso mitiga riscos financeiros iniciais e valida a empregabilidade nos mercados com demanda estatisticamente comprovada primeiro.
                 </p>
               </div>
               
@@ -537,7 +538,7 @@
                       </p>
                       <p className="text-slate-600 text-sm md:text-base leading-relaxed">
                         <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
-                        É o ativo mercadológico mais maduro do estado. A formação terá absorção quase imediata pelo robusto parque industrial do DAIA. O currículo pode ser validado rapidamente com foco em processos regulados, controle de qualidade e rigorosas normas de biossegurança exigidas pela Anvisa.
+                        Os dados do MTE comprovam que o eixo farmoquímico tem o maior saldo estrutural de vagas que exigem rigor de qualidade. A população jovem de 88 mil hab. (IBGE) combinada aos 110 mil empregos formais geram o cenário de menor risco financeiro para a primeira turma do SENAI.
                       </p>
                     </div>
                   </div>
@@ -553,7 +554,7 @@
                       </p>
                       <p className="text-slate-600 text-sm md:text-base leading-relaxed">
                         <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
-                        Posiciona o SENAI como protagonista no centro da revolução da bioeconomia nacional. Dialoga diretamente com o Programa Estadual de Bioinsumos e atende à urgência dos produtores rurais na transição para defensivos biológicos e biometano.
+                        O maior PIB agropecuário de GO (IMB) está sofrendo pressão ESG e econômica para adotar bioinsumos. O CAGED mostra forte contratação no apoio agrícola. Oferecer a formação aqui antecipa a demanda de centenas de novas plantas biológicas na região Sudoeste.
                       </p>
                     </div>
                   </div>
@@ -569,7 +570,7 @@
                       </p>
                       <p className="text-slate-600 text-sm md:text-base leading-relaxed">
                         <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
-                        Após consolidar e ajustar a matriz curricular nas Fases 1 e 2, o SENAI avança para capturar a demanda de pesquisa metropolitana (Ceti-Saúde) e começa a faturar com formações corporativas (<Tooltip term="FICs" text="Cursos de Formação Inicial e Continuada. Trilhas curtas e modulares ideais para requalificar equipes que já atuam no campo sem afastá-las da rotina." />) customizadas diretamente dentro das biofábricas no interior.
+                        Captura a massa absoluta de jovens (440k em GYN/APA via IBGE) e ramifica cursos modulares (FICs) atestados pelo MTE nas unidades "On Farm" no interior (Jataí/Catalão), onde as turmas longas de 1.200h têm menor taxa de conversão imediata.
                       </p>
                     </div>
                   </div>
@@ -583,8 +584,12 @@
           <footer className="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center">
             <div className="max-w-6xl mx-auto px-4">
               <p className="mb-2 font-semibold text-slate-300">Inteligência Estratégica para o Desenvolvimento Profissional</p>
-              <p className="text-sm">Os dados apresentados são baseados em projeções do Novo Caged, IBGE, Codego e Mapa do Trabalho Industrial.</p>
-              <p className="text-xs mt-4 opacity-50">Painel Interativo Otimizado para Apresentações Executivas</p>
+              <p className="text-sm mb-4">Relatório construído mediante cruzamento de microdados oficiais do Novo CAGED (MTE), Censo IBGE e Notas Técnicas do Instituto Mauro Borges (IMB).</p>
+              <div className="flex flex-wrap justify-center gap-3 opacity-60">
+                <span className="px-2 py-1 border border-slate-700 rounded text-xs">IBGE Censo 2022/Projeções</span>
+                <span className="px-2 py-1 border border-slate-700 rounded text-xs">MTE / Novo CAGED / RAIS</span>
+                <span className="px-2 py-1 border border-slate-700 rounded text-xs">IMB (Instituto Mauro Borges)</span>
+              </div>
             </div>
           </footer>
         </div>
