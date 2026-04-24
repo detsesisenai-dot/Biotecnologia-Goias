@@ -1,556 +1,599 @@
-import React, { useState } from 'react';
-import { 
-  MapPin, FlaskConical, Sprout, Activity, Factory, 
-  TrendingUp, BookOpen, Target, Microscope, ShieldCheck,
-  ChevronRight, Award, Lightbulb, Info, Users, Briefcase, Building2, CircleDollarSign,
-  GraduationCap, Globe
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infográfico Estratégico Biotecnologia SENAI</title>
+  
+  <!-- Carregamento do Tailwind CSS para a estilização -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Carregamento do React e ReactDOM via CDN para rodar nativamente no HTML -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Carregamento do Babel para interpretar o JSX no navegador -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-slate-50">
+  
+  <!-- Onde o React vai renderizar nossa aplicação -->
+  <div id="root"></div>
 
-// Componente de Legenda Interativa adaptado para mobile (toque/foco)
-const Tooltip = ({ term, text }) => (
-  <span className="relative group inline-block cursor-help" tabIndex="0">
-    <span className="border-b-2 border-dashed border-current text-inherit font-semibold hover:text-blue-600 transition-colors">
-      {term}
-    </span>
-    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block group-focus:block active:block w-64 md:w-72 p-3 bg-slate-800 text-white text-xs font-normal rounded-xl shadow-xl z-50 text-left normal-case opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-      <span className="font-bold text-blue-300 mb-1 flex items-center gap-1"><Info className="w-3 h-3"/> {term}</span>
-      {text}
-      <svg className="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255"><polygon className="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
-    </span>
-  </span>
-);
+  <!-- Script da nossa Aplicação usando JSX -->
+  <script type="text/babel">
+    const { useState } = React;
 
-const regionsData = [
-  {
-    id: 'anapolis',
-    name: 'Anápolis',
-    tier: 'Piloto / Prioridade Máxima',
-    vocacao: 'Farma & Qualidade',
-    icon: <FlaskConical className="w-8 h-8 text-blue-600" />,
-    color: 'bg-blue-50 border-blue-200',
-    textColor: 'text-blue-700',
-    indicators: [
-      { label: 'População (est. 2025)', value: '420,3 mil' },
-      { label: 'Indústrias DAIA', value: '~200' },
-      { label: 'Laboratórios Gdes', value: '20+' }
-    ],
-    demographics: 'Pop. Elegível (15-29 anos): ~105 mil jovens (IBGE). Alto índice de conclusão do Ensino Médio.',
-    investments: 'R$ 2,5+ Bilhões projetados (Expansão DAIA e Brainfarma).',
-    mapaTrabalho: 'Demanda de 1.200+ técnicos/ano (Áreas de Qualidade, Química e Farma).',
-    hiringSegments: ['Farmoquímica', 'Cosméticos', 'Alimentos & Bebidas'],
-    highlights: [
-      <span key="1">2º maior polo farmoquímico do Brasil (<Tooltip term="Codego" text="Companhia de Desenvolvimento Econômico de Goiás: administra distritos e mapeia investimentos, apontando grande densidade farmacêutica." />).</span>,
-      <span key="2">Expansão Brainfarma (<Tooltip term="IFA" text="Insumo Farmacêutico Ativo: reduz dependência de importação da China/Índia e exige alto rigor de biossegurança na produção local." /> de escopolamina - Gov. Federal 2026).</span>,
-      <span key="3">Produz 6 dos 10 medicamentos mais vendidos do país (2024).</span>
-    ],
-    senaiFocus: 'Controle de qualidade, microbiologia, análises laboratoriais, produção e assuntos regulatórios.',
-    strategicInsight: 'O foco comercial B2B é a mitigação de risco regulatório. O SENAI deve se posicionar como certificador de excelência para normas rigorosas da Anvisa. A indústria ganha segurança contra contaminações, lotes reprovados e multas.',
-    aderencia: 100,
-    justificativaAderencia: 'Encaixe perfeito com o parque farmoquímico do DAIA. As competências do currículo em controle de qualidade e normas da Anvisa atendem à maior dor imediata das indústrias locais.'
-  },
-  {
-    id: 'goiania',
-    name: 'Goiânia + Aparecida',
-    tier: 'Expansão Metropolitana',
-    vocacao: 'Saúde, P&D e Indústria',
-    icon: <Activity className="w-8 h-8 text-indigo-600" />,
-    color: 'bg-indigo-50 border-indigo-200',
-    textColor: 'text-indigo-700',
-    indicators: [
-      { label: 'Invest. Ceti-Saúde', value: 'R$ 21,6 mi' },
-      { label: 'Expansão Equiplex', value: 'R$ 85 mi' },
-      { label: 'Novas Indústrias (Aparecida)', value: '~200' }
-    ],
-    demographics: 'Pop. Elegível (15-29 anos): ~480 mil jovens (IBGE Metropolitano). Maior densidade de egressos.',
-    investments: 'R$ 150+ Milhões (P&D, Ceti-Saúde e novos distritos em Aparecida).',
-    mapaTrabalho: 'Demanda de 2.100+ técnicos/ano (Serviços de Saúde, Saneantes e Apoio Industrial).',
-    hiringSegments: ['Saúde Humana & Hospitais', 'Saneantes', 'Pesquisa Clínica'],
-    highlights: [
-      <span key="1"><Tooltip term="Ceti-Saúde" text="Centro de Excelência em Tecnologia e Inovação em Saúde: polo articulador entre UFG e Governo de Goiás focado no SUS." /> com foco em vacinas, imunobiológicos e terapias.</span>,
-      <span key="2">Equiplex dobrando capacidade em Aparecida de Goiânia.</span>,
-      <span key="3">Novo distrito industrial de Aparecida com previsão de 20 mil empregos.</span>
-    ],
-    senaiFocus: 'Pesquisa aplicada, biotecnologia ambiental, esterilidade, qualidade e produção hospitalar.',
-    strategicInsight: 'Posicionamento como "Biotecnologia de Fronteira". O aluno egresso do SENAI fará a ponte prática entre as inovações de laboratório geradas na academia (UFG/Ceti-Saúde) e a escala produtiva do novo parque industrial de Aparecida.',
-    aderencia: 90,
-    justificativaAderencia: 'Alta sinergia com o ecossistema de P&D. O recuo de 10% reflete o fato de que parte das vagas criadas focam em pesquisadores acadêmicos, demandando os técnicos apenas para apoio operacional.'
-  },
-  {
-    id: 'rioverde',
-    name: 'Rio Verde',
-    tier: 'Expansão Agro',
-    vocacao: 'Agrobiotecnologia',
-    icon: <Sprout className="w-8 h-8 text-emerald-600" />,
-    color: 'bg-emerald-50 border-emerald-200',
-    textColor: 'text-emerald-700',
-    indicators: [
-      { label: 'Produção Agrícola', value: 'R$ 6,9 bi' },
-      { label: 'PIB per capita (2023)', value: 'R$ 98,8 mil' },
-      { label: 'População', value: '241,5 mil' }
-    ],
-    demographics: 'Pop. Elegível (15-29 anos): ~62 mil jovens (IBGE). Forte atração de migrantes qualificados.',
-    investments: 'R$ 1,2+ Bilhão previstos (Plantas de Biometano e Bioenergia).',
-    mapaTrabalho: 'Demanda de 850+ técnicos/ano (Agroindústria, Laboratórios de Solos/Sementes).',
-    hiringSegments: ['Bioenergia', 'Bioinsumos', 'Nutrição Animal'],
-    highlights: [
-      <span key="1">Sede da <Tooltip term="URB" text="Unidade de Referência em Bioinsumos: testam e validam novas tecnologias e cepas biológicas antes da escala comercial ir para o campo." /> (CEBIO) de promotores de crescimento de plantas.</span>,
-      <span key="2">Destaque no Hub Goiás (2026) como base de inovação agro.</span>,
-      <span key="3">Nova planta de biometano (2025) alavancando bioeconomia e matriz sucroenergética.</span>
-    ],
-    senaiFocus: 'Bioinsumos, fermentação, microbiologia agrícola, bioprocessos e controle biológico.',
-    strategicInsight: 'O discurso de venda do curso aborda diretamente a "Dor Financeira do Agro": o alto custo de defensivos importados e a pressão global por metas ESG. O técnico capacita o produtor a operar biofábricas com eficiência e pureza garantida.',
-    aderencia: 95,
-    justificativaAderencia: 'Cobre exatamente o gargalo da agroindústria local: operação limpa de biofábricas e fermentadores. A base produtiva já está madura para absorver egressos do curso.'
-  },
-  {
-    id: 'jatai',
-    name: 'Jataí',
-    tier: 'Segunda Onda Agro',
-    vocacao: 'Bioinsumos "On Farm"',
-    icon: <Microscope className="w-8 h-8 text-teal-600" />,
-    color: 'bg-teal-50 border-teal-200',
-    textColor: 'text-teal-700',
-    indicators: [
-      { label: 'PIB per capita', value: 'R$ 94,8 mil' },
-      { label: 'População', value: '111 mil' },
-      { label: 'Foco Industrial', value: 'Biofábricas' }
-    ],
-    demographics: 'Pop. Elegível (15-29 anos): ~28 mil jovens (IBGE). Demanda por fixação de talentos no campo.',
-    investments: 'R$ 350+ Milhões (Usinas e expansão de Biofábricas).',
-    mapaTrabalho: 'Demanda de 400+ técnicos/ano (Apoio Agropecuário e Operação Biológica).',
-    hiringSegments: ['Biofábricas On Farm', 'Produção de Sementes', 'Fertilizantes'],
-    highlights: [
-      <span key="1">Polo de visitação diplomática para bioinsumos estadual.</span>,
-      <span key="2">Presença forte da Solubio (referência em bioinsumos on farm).</span>,
-      <span key="3">Alta demanda por assistência técnica e <Tooltip term="Controle Biológico" text="Uso de inimigos naturais (fungos, bactérias, vespas) para combater pragas agrícolas, reduzindo drasticamente o uso de agrotóxicos." />.</span>
-    ],
-    senaiFocus: 'Parcerias in company, especialização técnica, biofábricas e produção biológica.',
-    strategicInsight: 'O modelo de captação ideal não é balcão, e sim corporativo ("In Company"). O aluno-alvo já está empregado na fazenda e precisa de upskilling urgente em microbiologia básica para evitar a contaminação cruzada nas biofábricas rurais.',
-    aderencia: 80,
-    justificativaAderencia: 'Mercado promissor, mas muito nichado em rotinas "On Farm". O currículo genérico precisará de adaptações modulares (FICs) para focar menos em farma/clínica e mais no agronegócio.'
-  },
-  {
-    id: 'catalao',
-    name: 'Catalão',
-    tier: 'Aposta Regional',
-    vocacao: 'Acadêmico e Extensão',
-    icon: <Target className="w-8 h-8 text-orange-600" />,
-    color: 'bg-orange-50 border-orange-200',
-    textColor: 'text-orange-700',
-    indicators: [
-      { label: 'PIB per capita', value: 'R$ 90,4 mil' },
-      { label: 'População', value: '122,8 mil' },
-      { label: 'Parceria P&D', value: 'UFCAT/CEBIO' }
-    ],
-    demographics: 'Pop. Elegível (15-29 anos): ~31 mil jovens (IBGE). Foco universitário e técnico.',
-    investments: 'R$ 200+ Milhões (Mineração Verde, Fertilizantes e Transferência Tech).',
-    mapaTrabalho: 'Demanda de 350+ técnicos/ano (Indústria Extrativa, Química e Meio Ambiente).',
-    hiringSegments: ['Fertilizantes Especiais', 'Química Fina', 'Mineração Sustentável'],
-    highlights: [
-      <span key="1">Lançamento da 1ª biofábrica do município via Fapeg/CEBIO (2024).</span>,
-      <span key="2">Foco em <Tooltip term="Transferência de Tecnologia" text="Processo de transformar a pesquisa acadêmica (UFCAT) em produtos comerciais ou técnicas que a agroindústria possa usar no dia a dia." />.</span>,
-      <span key="3">Polo estratégico para interiorização da rede SENAI.</span>
-    ],
-    senaiFocus: 'Formação generalista em processos biológicos e apoio à transferência tecnológica.',
-    strategicInsight: 'Oportunidade para estruturar um ecossistema local. O SENAI entra como o "braço prático", formando profissionais de nível médio técnico que traduzem a inteligência acadêmica da universidade em soluções para pequenas agroindústrias.',
-    aderencia: 75,
-    justificativaAderencia: 'O ecossistema ainda está em formação inicial via transferência de tecnologia universitária. A demanda é melhor atendida agora por cursos de extensão do que por uma turma técnica densa de 1.200h.'
-  }
-];
+    // --- SISTEMA DE ÍCONES NATIVOS (Substitui o lucide-react para evitar quebras no Github Pages) ---
+    const icons = {
+      FlaskConical: <React.Fragment><path d="M10 2v7.31"/><path d="M14 9.3V2"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.5 16.5h13"/></React.Fragment>,
+      Activity: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>,
+      Sprout: <React.Fragment><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></React.Fragment>,
+      Microscope: <React.Fragment><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></React.Fragment>,
+      Target: <React.Fragment><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></React.Fragment>,
+      MapPin: <React.Fragment><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></React.Fragment>,
+      ChevronRight: <polyline points="9 18 15 12 9 6"/>,
+      Globe: <React.Fragment><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></React.Fragment>,
+      Users: <React.Fragment><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></React.Fragment>,
+      CircleDollarSign: <React.Fragment><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></React.Fragment>,
+      TrendingUp: <React.Fragment><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></React.Fragment>,
+      Building2: <React.Fragment><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></React.Fragment>,
+      Award: <React.Fragment><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></React.Fragment>,
+      BookOpen: <React.Fragment><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></React.Fragment>,
+      Lightbulb: <React.Fragment><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></React.Fragment>,
+      ShieldCheck: <React.Fragment><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></React.Fragment>,
+      Briefcase: <React.Fragment><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></React.Fragment>,
+      GraduationCap: <React.Fragment><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></React.Fragment>,
+      Info: <React.Fragment><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></React.Fragment>,
+      Factory: <React.Fragment><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></React.Fragment>
+    };
 
-const microPoles = ['Morrinhos', 'Urutaí', 'Cristalina', 'Ceres'];
+    const SvgIcon = ({ name, className }) => {
+      const defaultClass = className && className.includes('w-') ? className : `w-6 h-6 ${className || ''}`;
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={defaultClass}>
+          {icons[name]}
+        </svg>
+      );
+    };
 
-export default function BiotecDashboard() {
-  const [activeRegion, setActiveRegion] = useState(regionsData[0]);
+    // --- COMPONENTES DA APLICAÇÃO ---
+    const Tooltip = ({ term, text }) => (
+      <span className="relative group inline-block cursor-help" tabIndex="0">
+        <span className="border-b-2 border-dashed border-current text-inherit font-semibold hover:text-blue-600 transition-colors">
+          {term}
+        </span>
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block group-focus:block active:block w-64 md:w-72 p-3 bg-slate-800 text-white text-xs font-normal rounded-xl shadow-xl z-50 text-left normal-case opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span className="font-bold text-blue-300 mb-1 flex items-center gap-1"><SvgIcon name="Info" className="w-3 h-3"/> {term}</span>
+          {text}
+          <svg className="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255"><polygon className="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+        </span>
+      </span>
+    );
 
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 flex flex-col">
-      
-      {/* NavBar Simulada */}
-      <nav className="bg-slate-900 text-white p-4 shadow-md sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <GraduationCap className="w-6 h-6 text-blue-400" />
-            <span className="font-bold text-lg tracking-wide">SENAI<span className="font-light text-slate-300"> | Inteligência de Mercado</span></span>
-          </div>
-          <div className="flex items-center gap-4 text-sm text-slate-300">
-            <div className="hidden md:flex items-center gap-4">
-              <span>Relatório Executivo</span>
-              <span className="bg-slate-700 px-2 py-1 rounded text-xs font-semibold">Atualizado: 2026</span>
-            </div>
-            <img 
-              src="https://i.postimg.cc/HsxpXWs0/crti-det.png" 
-              alt="[Imagem da Logomarca CRTI]" 
-              className="h-9 w-auto object-contain bg-white rounded p-1 shadow-sm"
-            />
-          </div>
-        </div>
-      </nav>
+    const regionsData = [
+      {
+        id: 'anapolis',
+        name: 'Anápolis',
+        tier: 'Piloto / Prioridade Máxima',
+        vocacao: 'Farma & Qualidade',
+        icon: <SvgIcon name="FlaskConical" className="w-8 h-8 text-blue-600" />,
+        color: 'bg-blue-50 border-blue-200',
+        textColor: 'text-blue-700',
+        indicators: [
+          { label: 'População (est. 2025)', value: '420,3 mil' },
+          { label: 'Indústrias DAIA', value: '~200' },
+          { label: 'Laboratórios Gdes', value: '20+' }
+        ],
+        demographics: 'Pop. Elegível (15-29 anos): ~105 mil jovens (IBGE). Alto índice de conclusão do Ensino Médio.',
+        investments: 'R$ 2,5+ Bilhões projetados (Expansão DAIA e Brainfarma).',
+        mapaTrabalho: 'Demanda de 1.200+ técnicos/ano (Áreas de Qualidade, Química e Farma).',
+        hiringSegments: ['Farmoquímica', 'Cosméticos', 'Alimentos & Bebidas'],
+        highlights: [
+          <span key="1">2º maior polo farmoquímico do Brasil (<Tooltip term="Codego" text="Companhia de Desenvolvimento Econômico de Goiás: administra distritos e mapeia investimentos, apontando grande densidade farmacêutica." />).</span>,
+          <span key="2">Expansão Brainfarma (<Tooltip term="IFA" text="Insumo Farmacêutico Ativo: reduz dependência de importação da China/Índia e exige alto rigor de biossegurança na produção local." /> de escopolamina - Gov. Federal 2026).</span>,
+          <span key="3">Produz 6 dos 10 medicamentos mais vendidos do país (2024).</span>
+        ],
+        senaiFocus: 'Controle de qualidade, microbiologia, análises laboratoriais, produção e assuntos regulatórios.',
+        strategicInsight: 'O foco comercial B2B é a mitigação de risco regulatório. O SENAI deve se posicionar como certificador de excelência para normas rigorosas da Anvisa. A indústria ganha segurança contra contaminações, lotes reprovados e multas.',
+        aderencia: 100,
+        justificativaAderencia: 'Encaixe perfeito com o parque farmoquímico do DAIA. As competências do currículo em controle de qualidade e normas da Anvisa atendem à maior dor imediata das indústrias locais.'
+      },
+      {
+        id: 'goiania',
+        name: 'Goiânia + Aparecida',
+        tier: 'Expansão Metropolitana',
+        vocacao: 'Saúde, P&D e Indústria',
+        icon: <SvgIcon name="Activity" className="w-8 h-8 text-indigo-600" />,
+        color: 'bg-indigo-50 border-indigo-200',
+        textColor: 'text-indigo-700',
+        indicators: [
+          { label: 'Invest. Ceti-Saúde', value: 'R$ 21,6 mi' },
+          { label: 'Expansão Equiplex', value: 'R$ 85 mi' },
+          { label: 'Novas Indústrias (Aparecida)', value: '~200' }
+        ],
+        demographics: 'Pop. Elegível (15-29 anos): ~480 mil jovens (IBGE Metropolitano). Maior densidade de egressos.',
+        investments: 'R$ 150+ Milhões (P&D, Ceti-Saúde e novos distritos em Aparecida).',
+        mapaTrabalho: 'Demanda de 2.100+ técnicos/ano (Serviços de Saúde, Saneantes e Apoio Industrial).',
+        hiringSegments: ['Saúde Humana & Hospitais', 'Saneantes', 'Pesquisa Clínica'],
+        highlights: [
+          <span key="1"><Tooltip term="Ceti-Saúde" text="Centro de Excelência em Tecnologia e Inovação em Saúde: polo articulador entre UFG e Governo de Goiás focado no SUS." /> com foco em vacinas, imunobiológicos e terapias.</span>,
+          <span key="2">Equiplex dobrando capacidade em Aparecida de Goiânia.</span>,
+          <span key="3">Novo distrito industrial de Aparecida com previsão de 20 mil empregos.</span>
+        ],
+        senaiFocus: 'Pesquisa aplicada, biotecnologia ambiental, esterilidade, qualidade e produção hospitalar.',
+        strategicInsight: 'Posicionamento como "Biotecnologia de Fronteira". O aluno egresso do SENAI fará a ponte prática entre as inovações de laboratório geradas na academia (UFG/Ceti-Saúde) e a escala produtiva do novo parque industrial de Aparecida.',
+        aderencia: 90,
+        justificativaAderencia: 'Alta sinergia com o ecossistema de P&D. O recuo de 10% reflete o fato de que parte das vagas criadas focam em pesquisadores acadêmicos, demandando os técnicos apenas para apoio operacional.'
+      },
+      {
+        id: 'rioverde',
+        name: 'Rio Verde',
+        tier: 'Expansão Agro',
+        vocacao: 'Agrobiotecnologia',
+        icon: <SvgIcon name="Sprout" className="w-8 h-8 text-emerald-600" />,
+        color: 'bg-emerald-50 border-emerald-200',
+        textColor: 'text-emerald-700',
+        indicators: [
+          { label: 'Produção Agrícola', value: 'R$ 6,9 bi' },
+          { label: 'PIB per capita (2023)', value: 'R$ 98,8 mil' },
+          { label: 'População', value: '241,5 mil' }
+        ],
+        demographics: 'Pop. Elegível (15-29 anos): ~62 mil jovens (IBGE). Forte atração de migrantes qualificados.',
+        investments: 'R$ 1,2+ Bilhão previstos (Plantas de Biometano e Bioenergia).',
+        mapaTrabalho: 'Demanda de 850+ técnicos/ano (Agroindústria, Laboratórios de Solos/Sementes).',
+        hiringSegments: ['Bioenergia', 'Bioinsumos', 'Nutrição Animal'],
+        highlights: [
+          <span key="1">Sede da <Tooltip term="URB" text="Unidade de Referência em Bioinsumos: testam e validam novas tecnologias e cepas biológicas antes da escala comercial ir para o campo." /> (CEBIO) de promotores de crescimento de plantas.</span>,
+          <span key="2">Destaque no Hub Goiás (2026) como base de inovação agro.</span>,
+          <span key="3">Nova planta de biometano (2025) alavancando bioeconomia e matriz sucroenergética.</span>
+        ],
+        senaiFocus: 'Bioinsumos, fermentação, microbiologia agrícola, bioprocessos e controle biológico.',
+        strategicInsight: 'O discurso de venda do curso aborda diretamente a "Dor Financeira do Agro": o alto custo de defensivos importados e a pressão global por metas ESG. O técnico capacita o produtor a operar biofábricas com eficiência e pureza garantida.',
+        aderencia: 95,
+        justificativaAderencia: 'Cobre exatamente o gargalo da agroindústria local: operação limpa de biofábricas e fermentadores. A base produtiva já está madura para absorver egressos do curso.'
+      },
+      {
+        id: 'jatai',
+        name: 'Jataí',
+        tier: 'Segunda Onda Agro',
+        vocacao: 'Bioinsumos "On Farm"',
+        icon: <SvgIcon name="Microscope" className="w-8 h-8 text-teal-600" />,
+        color: 'bg-teal-50 border-teal-200',
+        textColor: 'text-teal-700',
+        indicators: [
+          { label: 'PIB per capita', value: 'R$ 94,8 mil' },
+          { label: 'População', value: '111 mil' },
+          { label: 'Foco Industrial', value: 'Biofábricas' }
+        ],
+        demographics: 'Pop. Elegível (15-29 anos): ~28 mil jovens (IBGE). Demanda por fixação de talentos no campo.',
+        investments: 'R$ 350+ Milhões (Usinas e expansão de Biofábricas).',
+        mapaTrabalho: 'Demanda de 400+ técnicos/ano (Apoio Agropecuário e Operação Biológica).',
+        hiringSegments: ['Biofábricas On Farm', 'Produção de Sementes', 'Fertilizantes'],
+        highlights: [
+          <span key="1">Polo de visitação diplomática para bioinsumos estadual.</span>,
+          <span key="2">Presença forte da Solubio (referência em bioinsumos on farm).</span>,
+          <span key="3">Alta demanda por assistência técnica e <Tooltip term="Controle Biológico" text="Uso de inimigos naturais (fungos, bactérias, vespas) para combater pragas agrícolas, reduzindo drasticamente o uso de agrotóxicos." />.</span>
+        ],
+        senaiFocus: 'Parcerias in company, especialização técnica, biofábricas e produção biológica.',
+        strategicInsight: 'O modelo de captação ideal não é balcão, e sim corporativo ("In Company"). O aluno-alvo já está empregado na fazenda e precisa de upskilling urgente em microbiologia básica para evitar a contaminação cruzada nas biofábricas rurais.',
+        aderencia: 80,
+        justificativaAderencia: 'Mercado promissor, mas muito nichado em rotinas "On Farm". O currículo genérico precisará de adaptações modulares (FICs) para focar menos em farma/clínica e mais no agronegócio.'
+      },
+      {
+        id: 'catalao',
+        name: 'Catalão',
+        tier: 'Aposta Regional',
+        vocacao: 'Acadêmico e Extensão',
+        icon: <SvgIcon name="Target" className="w-8 h-8 text-orange-600" />,
+        color: 'bg-orange-50 border-orange-200',
+        textColor: 'text-orange-700',
+        indicators: [
+          { label: 'PIB per capita', value: 'R$ 90,4 mil' },
+          { label: 'População', value: '122,8 mil' },
+          { label: 'Parceria P&D', value: 'UFCAT/CEBIO' }
+        ],
+        demographics: 'Pop. Elegível (15-29 anos): ~31 mil jovens (IBGE). Foco universitário e técnico.',
+        investments: 'R$ 200+ Milhões (Mineração Verde, Fertilizantes e Transferência Tech).',
+        mapaTrabalho: 'Demanda de 350+ técnicos/ano (Indústria Extrativa, Química e Meio Ambiente).',
+        hiringSegments: ['Fertilizantes Especiais', 'Química Fina', 'Mineração Sustentável'],
+        highlights: [
+          <span key="1">Lançamento da 1ª biofábrica do município via Fapeg/CEBIO (2024).</span>,
+          <span key="2">Foco em <Tooltip term="Transferência de Tecnologia" text="Processo de transformar a pesquisa acadêmica (UFCAT) em produtos comerciais ou técnicas que a agroindústria possa usar no dia a dia." />.</span>,
+          <span key="3">Polo estratégico para interiorização da rede SENAI.</span>
+        ],
+        senaiFocus: 'Formação generalista em processos biológicos e apoio à transferência tecnológica.',
+        strategicInsight: 'Oportunidade para estruturar um ecossistema local. O SENAI entra como o "braço prático", formando profissionais de nível médio técnico que traduzem a inteligência acadêmica da universidade em soluções para pequenas agroindústrias.',
+        aderencia: 75,
+        justificativaAderencia: 'O ecossistema ainda está em formação inicial via transferência de tecnologia universitária. A demanda é melhor atendida agora por cursos de extensão do que por uma turma técnica densa de 1.200h.'
+      }
+    ];
 
-      {/* Main Content Area */}
-      <main className="flex-grow p-4 md:p-8">
-        
-        {/* Header Section / Hero */}
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-10 border-t-4 border-blue-600">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div className="max-w-2xl">
-              <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
-                Estudo de Viabilidade: Biotecnologia em Goiás
-              </h1>
-              <p className="text-slate-600 text-lg leading-relaxed">
-                Este painel interativo cruza dados oficiais (Caged, IBGE e Mapa do Trabalho) com a estrutura produtiva do estado. 
-                O objetivo é mapear, de forma precisa, os municípios mais estratégicos para a implantação de novas turmas do <strong>Curso Técnico em Biotecnologia</strong> do SENAI-GO.
-              </p>
-            </div>
-            <div className="bg-blue-50 px-5 py-4 rounded-xl border border-blue-100 flex flex-col gap-2 min-w-[250px]">
+    const microPoles = ['Morrinhos', 'Urutaí', 'Cristalina', 'Ceres'];
+
+    function BiotecDashboard() {
+      const [activeRegion, setActiveRegion] = useState(regionsData[0]);
+
+      return (
+        <div className="min-h-screen bg-slate-50 font-sans text-slate-800 flex flex-col">
+          
+          <nav className="bg-slate-900 text-white p-4 shadow-md sticky top-0 z-40">
+            <div className="max-w-6xl mx-auto flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <TrendingUp className="text-blue-600 w-6 h-6" />
-                <span className="font-bold text-blue-900 text-lg">Alta Empregabilidade</span>
+                <SvgIcon name="GraduationCap" className="w-6 h-6 text-blue-400" />
+                <span className="font-bold text-lg tracking-wide">SENAI<span className="font-light text-slate-300"> | Inteligência de Mercado</span></span>
               </div>
-              <p className="text-sm text-blue-800 leading-tight">
-                O <Tooltip term="Novo Caged" text="Cadastro Geral de Empregados e Desempregados: em fev/2026, apontou pessoas com ensino médio completo como o grupo de maior absorção de vagas em GO." /> de 2026 indica que profissionais com Ensino Médio/Técnico são o grupo de maior absorção no mercado goiano atual.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* The Two Engines Section */}
-        <div className="max-w-6xl mx-auto mb-12">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">Os Dois Motores da Biotecnologia Goiana</h2>
-            <p className="text-slate-600 max-w-3xl">
-              Para facilitar a tomada de decisão comercial e pedagógica, dividimos o potencial do estado em dois grandes eixos econômicos. 
-              Eles representam áreas onde a biotecnologia já não é apenas uma aposta futura, mas uma <strong>realidade produtiva</strong> que sofre com a escassez de mão de obra técnica especializada.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500 hover:shadow-md transition-shadow">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-blue-100 p-3 rounded-full"><FlaskConical className="text-blue-600" /></div>
-                <h3 className="text-xl font-bold text-slate-800">
-                  <Tooltip term="Motor 1: Saúde & Fármacos" text="Eixo tracionado pela indústria de transformação química e biológica voltada à saúde humana e animal." />
-                </h3>
-              </div>
-              <p className="text-slate-600 mb-4">
-                Base produtiva amplamente consolidada no eixo Anápolis/Aparecida, sustentada por indústrias pesadas e institutos de pesquisa na capital. Existe uma demanda reprimida urgente por técnicos voltados ao controle de qualidade e regulação.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Farmoquímica</span>
-                <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Vacinas (<Tooltip term="SUS" text="Sistema Único de Saúde: gera grande previsibilidade de compras via acordos de offtake ou parcerias de desenvolvimento produtivo." />)</span>
-                <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Terapias Avançadas</span>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-emerald-500 hover:shadow-md transition-shadow">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-emerald-100 p-3 rounded-full"><Sprout className="text-emerald-600" /></div>
-                <h3 className="text-xl font-bold text-slate-800">
-                  <Tooltip term="Motor 2: Agrobiotecnologia" text="Eixo tracionado pela modernização do agronegócio, focado em sustentabilidade, controle biológico e economia circular." />
-                </h3>
-              </div>
-              <p className="text-slate-600 mb-4">
-                O novo polo de inovação verde. Impulsionado por políticas públicas estaduais consistentes, expansão de <Tooltip term="CEBIO" text="Centro de Excelência em Bioinsumos: articula pesquisa, ensino e extensão agrícola, descentralizando polos estratégicos pelo interior de Goiás." /> e a força sucroenergética do Sudoeste goiano.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600"><Tooltip term="Bioinsumos On Farm" text="Produção biológica realizada dentro da própria propriedade rural. É o setor que mais cresce e que mais carece de boas práticas de laboratório." /></span>
-                <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Biometano</span>
-                <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Melhoramento Genético</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Interactive Dashboard Section */}
-        <div className="max-w-6xl mx-auto mb-12">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">Painel Interativo de Municípios</h2>
-            <p className="text-slate-600 max-w-3xl">
-              Navegue pelo mapa de oportunidades do estado. <strong>Clique nos municípios listados no menu à esquerda</strong> para visualizar um raio-X completo da região, abrangendo desde a vocação industrial local até o recorte demográfico e o foco curricular sugerido para a unidade do SENAI.
-            </p>
-          </div>
-
-          <div className="flex flex-col lg:flex-row gap-6">
-            
-            {/* Region Selector */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-3">
-              <h3 className="font-bold text-slate-700 flex items-center gap-2 ml-1 pb-2 border-b border-slate-200">
-                <MapPin className="w-5 h-5" /> Selecione o Polo
-              </h3>
-              {regionsData.map((region) => (
-                <button
-                  key={region.id}
-                  onClick={() => setActiveRegion(region)}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                    activeRegion.id === region.id 
-                      ? 'border-blue-500 bg-white shadow-md' 
-                      : 'border-transparent bg-white shadow-sm hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${region.color}`}>
-                      {region.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-800">{region.name}</h4>
-                      <p className="text-xs text-slate-500 font-medium">{region.tier}</p>
-                    </div>
-                  </div>
-                  <ChevronRight className={`w-5 h-5 ${activeRegion.id === region.id ? 'text-blue-500' : 'text-slate-300 group-hover:text-slate-400'}`} />
-                </button>
-              ))}
-              
-              <div className="mt-4 p-5 bg-slate-200/50 rounded-xl border border-slate-200 border-dashed">
-                <h4 className="font-semibold text-slate-700 text-sm mb-2 flex items-center gap-2">
-                  <Globe className="w-4 h-4" /> Rede de Extensão (Apoio)
-                </h4>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {microPoles.map(pole => (
-                    <span key={pole} className="text-xs bg-white border border-slate-300 px-2 py-1 rounded shadow-sm text-slate-600 font-medium">
-                      {pole}
-                    </span>
-                  ))}
+              <div className="flex items-center gap-4 text-sm text-slate-300">
+                <div className="hidden md:flex items-center gap-4">
+                  <span>Relatório Executivo</span>
+                  <span className="bg-slate-700 px-2 py-1 rounded text-xs font-semibold">Atualizado: 2026</span>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  Micropolos que já abrigam bases do CEBIO. Excelentes para capilarizar o alcance através de itinerários modulares, unidades móveis e cursos rápidos (FICs).
+                <img 
+                  src="https://i.postimg.cc/HsxpXWs0/crti-det.png" 
+                  alt="[Imagem da Logomarca CRTI]" 
+                  className="h-9 w-auto object-contain bg-white rounded p-1 shadow-sm"
+                />
+              </div>
+            </div>
+          </nav>
+
+          <main className="flex-grow p-4 md:p-8">
+            
+            <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-10 border-t-4 border-blue-600">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div className="max-w-2xl">
+                  <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+                    Estudo de Viabilidade: Biotecnologia em Goiás
+                  </h1>
+                  <p className="text-slate-600 text-lg leading-relaxed">
+                    Este painel interativo cruza dados oficiais (Caged, IBGE e Mapa do Trabalho) com a estrutura produtiva do estado. 
+                    O objetivo é mapear, de forma precisa, os municípios mais estratégicos para a implantação de novas turmas do <strong>Curso Técnico em Biotecnologia</strong> do SENAI-GO.
+                  </p>
+                </div>
+                <div className="bg-blue-50 px-5 py-4 rounded-xl border border-blue-100 flex flex-col gap-2 min-w-[250px]">
+                  <div className="flex items-center gap-2">
+                    <SvgIcon name="TrendingUp" className="text-blue-600 w-6 h-6" />
+                    <span className="font-bold text-blue-900 text-lg">Alta Empregabilidade</span>
+                  </div>
+                  <p className="text-sm text-blue-800 leading-tight">
+                    O <Tooltip term="Novo Caged" text="Cadastro Geral de Empregados e Desempregados: em fev/2026, apontou pessoas com ensino médio completo como o grupo de maior absorção de vagas em GO." /> de 2026 indica que profissionais com Ensino Médio/Técnico são o grupo de maior absorção no mercado goiano atual.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-slate-800 mb-2">Os Dois Motores da Biotecnologia Goiana</h2>
+                <p className="text-slate-600 max-w-3xl">
+                  Para facilitar a tomada de decisão comercial e pedagógica, dividimos o potencial do estado em dois grandes eixos econômicos. 
+                  Eles representam áreas onde a biotecnologia já não é apenas uma aposta futura, mas uma <strong>realidade produtiva</strong> que sofre com a escassez de mão de obra técnica especializada.
                 </p>
               </div>
-            </div>
 
-            {/* Detailed View Panel */}
-            <div className="w-full lg:w-2/3">
-              <div className="bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:p-8 h-full relative overflow-hidden transition-all">
-                {/* Background Decoration */}
-                <div className={`absolute -right-16 -top-16 opacity-5 pointer-events-none transform scale-[2] ${activeRegion.textColor} transition-colors duration-500`}>
-                  {activeRegion.icon}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500 hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-blue-100 p-3 rounded-full"><SvgIcon name="FlaskConical" className="text-blue-600 w-6 h-6" /></div>
+                    <h3 className="text-xl font-bold text-slate-800">
+                      <Tooltip term="Motor 1: Saúde & Fármacos" text="Eixo tracionado pela indústria de transformação química e biológica voltada à saúde humana e animal." />
+                    </h3>
+                  </div>
+                  <p className="text-slate-600 mb-4">
+                    Base produtiva amplamente consolidada no eixo Anápolis/Aparecida, sustentada por indústrias pesadas e institutos de pesquisa na capital. Existe uma demanda reprimida urgente por técnicos voltados ao controle de qualidade e regulação.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Farmoquímica</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Vacinas (<Tooltip term="SUS" text="Sistema Único de Saúde: gera grande previsibilidade de compras via acordos de offtake ou parcerias de desenvolvimento produtivo." />)</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Terapias Avançadas</span>
+                  </div>
                 </div>
 
-                <div className="relative z-10">
-                  {/* Header do Card Ativo */}
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-                    <div>
-                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${activeRegion.color} ${activeRegion.textColor}`}>
-                        Vocação Principal: {activeRegion.vocacao}
-                      </span>
-                      <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">{activeRegion.name}</h2>
-                      <p className="text-slate-500 font-medium text-sm mt-1 uppercase tracking-wider">{activeRegion.tier}</p>
-                    </div>
-                    
-                    {/* Aderência Gauge & Justificativa */}
-                    <div className="flex flex-col items-start bg-slate-50 p-4 rounded-xl border border-slate-100 max-w-sm md:ml-auto">
-                      <span className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wide">
-                        <Tooltip term="Índice de Aderência" text="Índice sintético (0-100%) que cruza o currículo do curso do SENAI com o grau de maturidade do ecossistema e das indústrias da região." />
-                      </span>
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 shrink-0 rounded-full border-4 border-slate-200 flex items-center justify-center relative">
-                          <svg className="absolute inset-0 w-full h-full transform -rotate-90">
-                            <circle cx="28" cy="28" r="28" className="stroke-current text-slate-200" strokeWidth="6" fill="none" />
-                            <circle 
-                              cx="28" cy="28" r="28" 
-                              className={`stroke-current ${activeRegion.textColor.replace('text-', 'text-')}`} 
-                              strokeWidth="6" fill="none" 
-                              strokeDasharray="176" 
-                              strokeDashoffset={176 - (176 * activeRegion.aderencia) / 100}
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <span className="text-lg font-bold text-slate-700">{activeRegion.aderencia}%</span>
-                        </div>
-                        <div className="text-xs text-slate-600 leading-relaxed border-l-2 border-slate-200 pl-3">
-                          <strong className="block text-slate-700 mb-0.5">Por que {activeRegion.aderencia}%?</strong>
-                          {activeRegion.justificativaAderencia}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Indicators Quick-view */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-8">
-                    {activeRegion.indicators.map((ind, i) => (
-                      <div key={i} className="bg-slate-50 p-4 rounded-xl border border-slate-100 hover:bg-slate-100 transition-colors">
-                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">{ind.label}</p>
-                        <p className="text-xl md:text-2xl font-black text-slate-800">{ind.value}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Data Intelligence (IBGE, Mapa do Trabalho, Investimentos) */}
-                  <div className="mb-8">
-                    <h3 className="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
-                      <Briefcase className="w-5 h-5 text-blue-500" /> Inteligência de Dados & Contratação
+                <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-emerald-500 hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-emerald-100 p-3 rounded-full"><SvgIcon name="Sprout" className="text-emerald-600 w-6 h-6" /></div>
+                    <h3 className="text-xl font-bold text-slate-800">
+                      <Tooltip term="Motor 2: Agrobiotecnologia" text="Eixo tracionado pela modernização do agronegócio, focado em sustentabilidade, controle biológico e economia circular." />
                     </h3>
-                    <p className="text-sm text-slate-600 mb-4">
-                      Cruzamos estimativas demográficas locais com o radar de investimentos industriais para validar a sustentabilidade econômica a longo prazo de uma turma.
-                    </p>
-                    <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-slate-200 p-2 rounded-lg mt-0.5"><Users className="w-4 h-4 text-slate-600" /></div>
-                          <div>
-                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                              <Tooltip term="Público Elegível (IBGE)" text="Faixa etária de 15 a 29 anos, considerada o público-alvo prioritário para ingressar em cursos de formação técnica de nível médio." />
-                            </p>
-                            <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.demographics}</p>
-                          </div>
+                  </div>
+                  <p className="text-slate-600 mb-4">
+                    O novo polo de inovação verde. Impulsionado por políticas públicas estaduais consistentes, expansão de <Tooltip term="CEBIO" text="Centro de Excelência em Bioinsumos: articula pesquisa, ensino e extensão agrícola, descentralizando polos estratégicos pelo interior de Goiás." /> e a força sucroenergética do Sudoeste goiano.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600"><Tooltip term="Bioinsumos On Farm" text="Produção biológica realizada dentro da própria propriedade rural. É o setor que mais cresce e que mais carece de boas práticas de laboratório." /></span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Biometano</span>
+                    <span className="px-2 py-1 bg-slate-100 text-xs font-medium rounded text-slate-600">Melhoramento Genético</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-slate-800 mb-2">Painel Interativo de Municípios</h2>
+                <p className="text-slate-600 max-w-3xl">
+                  Navegue pelo mapa de oportunidades do estado. <strong>Clique nos municípios listados no menu à esquerda</strong> para visualizar um raio-X completo da região, abrangendo desde a vocação industrial local até o recorte demográfico e o foco curricular sugerido para a unidade do SENAI.
+                </p>
+              </div>
+
+              <div className="flex flex-col lg:flex-row gap-6">
+                
+                <div className="w-full lg:w-1/3 flex flex-col gap-3">
+                  <h3 className="font-bold text-slate-700 flex items-center gap-2 ml-1 pb-2 border-b border-slate-200">
+                    <SvgIcon name="MapPin" className="w-5 h-5" /> Selecione o Polo
+                  </h3>
+                  {regionsData.map((region) => (
+                    <button
+                      key={region.id}
+                      onClick={() => setActiveRegion(region)}
+                      className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                        activeRegion.id === region.id 
+                          ? 'border-blue-500 bg-white shadow-md' 
+                          : 'border-transparent bg-white shadow-sm hover:border-slate-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${region.color}`}>
+                          {region.icon}
                         </div>
-                        <div className="flex items-start gap-3">
-                          <div className="bg-emerald-100 p-2 rounded-lg mt-0.5"><CircleDollarSign className="w-4 h-4 text-emerald-600" /></div>
-                          <div>
-                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                              <Tooltip term="Investimentos Industriais" text="Aporte financeiro recente mapeado em expansões e novas plantas, indicando dinamismo econômico e futura abertura de vagas." />
-                            </p>
-                            <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.investments}</p>
-                          </div>
+                        <div>
+                          <h4 className="font-bold text-slate-800">{region.name}</h4>
+                          <p className="text-xs text-slate-500 font-medium">{region.tier}</p>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-blue-100 p-2 rounded-lg mt-0.5"><TrendingUp className="w-4 h-4 text-blue-600" /></div>
-                          <div>
-                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                              <Tooltip term="Mapa do Trabalho SENAI" text="Projeção do Observatório Nacional da Indústria sobre a necessidade de formação técnica em áreas correlatas na região." />
-                            </p>
-                            <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.mapaTrabalho}</p>
-                          </div>
+                      <SvgIcon name="ChevronRight" className={`w-5 h-5 ${activeRegion.id === region.id ? 'text-blue-500' : 'text-slate-300 group-hover:text-slate-400'}`} />
+                    </button>
+                  ))}
+                  
+                  <div className="mt-4 p-5 bg-slate-200/50 rounded-xl border border-slate-200 border-dashed">
+                    <h4 className="font-semibold text-slate-700 text-sm mb-2 flex items-center gap-2">
+                      <SvgIcon name="Globe" className="w-4 h-4" /> Rede de Extensão (Apoio)
+                    </h4>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {microPoles.map(pole => (
+                        <span key={pole} className="text-xs bg-white border border-slate-300 px-2 py-1 rounded shadow-sm text-slate-600 font-medium">
+                          {pole}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Micropolos que já abrigam bases do CEBIO. Excelentes para capilarizar o alcance através de itinerários modulares, unidades móveis e cursos rápidos (FICs).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-full lg:w-2/3">
+                  <div className="bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:p-8 h-full relative overflow-hidden transition-all">
+                    
+                    <div className={`absolute -right-16 -top-16 opacity-5 pointer-events-none transform scale-[2] ${activeRegion.textColor} transition-colors duration-500`}>
+                      {activeRegion.icon}
+                    </div>
+
+                    <div className="relative z-10">
+                      
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                          <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${activeRegion.color} ${activeRegion.textColor}`}>
+                            Vocação Principal: {activeRegion.vocacao}
+                          </span>
+                          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">{activeRegion.name}</h2>
+                          <p className="text-slate-500 font-medium text-sm mt-1 uppercase tracking-wider">{activeRegion.tier}</p>
                         </div>
-                        <div className="flex items-start gap-3">
-                          <div className="bg-indigo-100 p-2 rounded-lg mt-0.5"><Building2 className="w-4 h-4 text-indigo-600" /></div>
-                          <div>
-                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                              <Tooltip term="Segmentos Contratantes" text="Principais atividades econômicas (CNAEs) da região que irão absorver os técnicos formados." />
-                            </p>
-                            <div className="flex flex-wrap gap-1.5 mt-1.5">
-                              {activeRegion.hiringSegments.map((seg, i) => (
-                                <span key={i} className="px-2 py-1 bg-white border border-slate-200 text-[10px] font-bold text-slate-600 uppercase tracking-wide rounded">
-                                  {seg}
-                                </span>
-                              ))}
+                        
+                        <div className="flex flex-col items-start bg-slate-50 p-4 rounded-xl border border-slate-100 max-w-sm md:ml-auto">
+                          <span className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wide">
+                            <Tooltip term="Índice de Aderência" text="Índice sintético (0-100%) que cruza o currículo do curso do SENAI com o grau de maturidade do ecossistema e das indústrias da região." />
+                          </span>
+                          <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 shrink-0 rounded-full border-4 border-slate-200 flex items-center justify-center relative">
+                              <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+                                <circle cx="28" cy="28" r="28" className="stroke-current text-slate-200" strokeWidth="6" fill="none" />
+                                <circle 
+                                  cx="28" cy="28" r="28" 
+                                  className={`stroke-current ${activeRegion.textColor.replace('text-', 'text-')}`} 
+                                  strokeWidth="6" fill="none" 
+                                  strokeDasharray="176" 
+                                  strokeDashoffset={176 - (176 * activeRegion.aderencia) / 100}
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              <span className="text-lg font-bold text-slate-700">{activeRegion.aderencia}%</span>
+                            </div>
+                            <div className="text-xs text-slate-600 leading-relaxed border-l-2 border-slate-200 pl-3">
+                              <strong className="block text-slate-700 mb-0.5">Por que {activeRegion.aderencia}%?</strong>
+                              {activeRegion.justificativaAderencia}
                             </div>
                           </div>
                         </div>
                       </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-8">
+                        {activeRegion.indicators.map((ind, i) => (
+                          <div key={i} className="bg-slate-50 p-4 rounded-xl border border-slate-100 hover:bg-slate-100 transition-colors">
+                            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">{ind.label}</p>
+                            <p className="text-xl md:text-2xl font-black text-slate-800">{ind.value}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mb-8">
+                        <h3 className="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
+                          <SvgIcon name="Briefcase" className="w-5 h-5 text-blue-500" /> Inteligência de Dados & Contratação
+                        </h3>
+                        <p className="text-sm text-slate-600 mb-4">
+                          Cruzamos estimativas demográficas locais com o radar de investimentos industriais para validar a sustentabilidade econômica a longo prazo de uma turma.
+                        </p>
+                        <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+                          <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                              <div className="bg-slate-200 p-2 rounded-lg mt-0.5"><SvgIcon name="Users" className="w-4 h-4 text-slate-600" /></div>
+                              <div>
+                                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                                  <Tooltip term="Público Elegível (IBGE)" text="Faixa etária de 15 a 29 anos, considerada o público-alvo prioritário para ingressar em cursos de formação técnica de nível médio." />
+                                </p>
+                                <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.demographics}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <div className="bg-emerald-100 p-2 rounded-lg mt-0.5"><SvgIcon name="CircleDollarSign" className="w-4 h-4 text-emerald-600" /></div>
+                              <div>
+                                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                                  <Tooltip term="Investimentos Industriais" text="Aporte financeiro recente mapeado em expansões e novas plantas, indicando dinamismo econômico e futura abertura de vagas." />
+                                </p>
+                                <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.investments}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                              <div className="bg-blue-100 p-2 rounded-lg mt-0.5"><SvgIcon name="TrendingUp" className="w-4 h-4 text-blue-600" /></div>
+                              <div>
+                                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                                  <Tooltip term="Mapa do Trabalho SENAI" text="Projeção do Observatório Nacional da Indústria sobre a necessidade de formação técnica em áreas correlatas na região." />
+                                </p>
+                                <p className="text-sm text-slate-700 font-medium mt-0.5">{activeRegion.mapaTrabalho}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <div className="bg-indigo-100 p-2 rounded-lg mt-0.5"><SvgIcon name="Building2" className="w-4 h-4 text-indigo-600" /></div>
+                              <div>
+                                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                                  <Tooltip term="Segmentos Contratantes" text="Principais atividades econômicas (CNAEs) da região que irão absorver os técnicos formados." />
+                                </p>
+                                <div className="flex flex-wrap gap-1.5 mt-1.5">
+                                  {activeRegion.hiringSegments.map((seg, i) => (
+                                    <span key={i} className="px-2 py-1 bg-white border border-slate-200 text-[10px] font-bold text-slate-600 uppercase tracking-wide rounded">
+                                      {seg}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mb-8">
+                        <h3 className="font-bold text-slate-800 text-lg mb-3 flex items-center gap-2">
+                          <SvgIcon name="Factory" className="w-5 h-5 text-slate-400" /> Fatos e Evidências do Ecossistema
+                        </h3>
+                        <ul className="space-y-3 bg-white border border-slate-100 rounded-xl p-4">
+                          {activeRegion.highlights.map((high, i) => (
+                            <li key={i} className="flex items-start gap-3 text-slate-700 text-sm md:text-base">
+                              <SvgIcon name="Award" className={`w-5 h-5 flex-shrink-0 mt-0.5 ${activeRegion.textColor}`} />
+                              <span>{high}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-900 rounded-xl p-5 md:p-6 text-white shadow-inner mb-6">
+                        <h3 className="font-bold flex items-center gap-2 mb-3 text-slate-100">
+                          <SvgIcon name="BookOpen" className="w-5 h-5 text-blue-400" /> Proposta Curricular SENAI (1.200h)
+                        </h3>
+                        <p className="text-slate-300 text-sm md:text-base leading-relaxed">
+                          <span className="font-bold text-white uppercase tracking-wider text-xs block mb-1">Ajuste de Foco Regional:</span> 
+                          {activeRegion.senaiFocus}
+                        </p>
+                      </div>
+
+                      <div className={`rounded-xl p-5 md:p-6 border-l-4 shadow-sm ${activeRegion.color.replace('bg-', 'bg-').replace('50', '100')} ${activeRegion.color.split(' ')[1]}`}>
+                        <h3 className={`font-bold flex items-center gap-2 mb-2 ${activeRegion.textColor}`}>
+                          <SvgIcon name="Lightbulb" className="w-5 h-5" /> Insight Comercial Estratégico
+                        </h3>
+                        <p className="text-slate-800 text-sm md:text-base leading-relaxed font-medium">
+                          {activeRegion.strategicInsight}
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+              <div className="bg-slate-800 p-6 md:p-8 text-white">
+                <h2 className="text-2xl font-bold flex items-center gap-2 mb-3">
+                  <SvgIcon name="ShieldCheck" className="text-blue-400 w-7 h-7" /> Plano de Implantação Recomendado
+                </h2>
+                <p className="text-slate-300 max-w-4xl text-sm md:text-base">
+                  A abertura de novas formações técnicas exige um planejamento cadenciado. Em vez de lançar turmas simultâneas em todo o estado, 
+                  recomendamos uma estratégia de expansão em "ondas" (fases). Isso mitiga riscos financeiros iniciais e permite validar a aderência do currículo primeiro nos mercados mais urgentes, financiando a expansão posterior.
+                </p>
+              </div>
+              
+              <div className="p-6 md:p-10">
+                <div className="relative border-l-2 border-slate-200 ml-3 md:ml-6 space-y-10 pb-4">
+                  
+                  <div className="relative pl-8 md:pl-10">
+                    <div className="absolute -left-3 md:-left-[13px] top-0 bg-blue-600 w-6 h-6 md:w-7 md:h-7 rounded-full border-4 border-white shadow-sm flex items-center justify-center">
+                      <span className="text-white text-[10px] font-bold">1</span>
+                    </div>
+                    <h3 className="font-extrabold text-xl text-slate-800 mb-2">Fase 1: A Turma Piloto Segura (Curto Prazo)</h3>
+                    <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                      <p className="text-slate-700 mb-2">
+                        <strong className="text-slate-900">Onde:</strong> Unidade de Anápolis.
+                      </p>
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                        <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
+                        É o ativo mercadológico mais maduro do estado. A formação terá absorção quase imediata pelo robusto parque industrial do DAIA. O currículo pode ser validado rapidamente com foco em processos regulados, controle de qualidade e rigorosas normas de biossegurança exigidas pela Anvisa.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-8 md:pl-10">
+                    <div className="absolute -left-3 md:-left-[13px] top-0 bg-emerald-500 w-6 h-6 md:w-7 md:h-7 rounded-full border-4 border-white shadow-sm flex items-center justify-center">
+                      <span className="text-white text-[10px] font-bold">2</span>
+                    </div>
+                    <h3 className="font-extrabold text-xl text-slate-800 mb-2">Fase 2: A Fronteira Agro (Médio Prazo)</h3>
+                    <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                      <p className="text-slate-700 mb-2">
+                        <strong className="text-slate-900">Onde:</strong> Unidade de Rio Verde.
+                      </p>
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                        <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
+                        Posiciona o SENAI como protagonista no centro da revolução da bioeconomia nacional. Dialoga diretamente com o Programa Estadual de Bioinsumos e atende à urgência dos produtores rurais na transição para defensivos biológicos e biometano.
+                      </p>
                     </div>
                   </div>
 
-                  {/* Justificativa / Highlights */}
-                  <div className="mb-8">
-                    <h3 className="font-bold text-slate-800 text-lg mb-3 flex items-center gap-2">
-                      <Factory className="w-5 h-5 text-slate-400" /> Fatos e Evidências do Ecossistema
-                    </h3>
-                    <ul className="space-y-3 bg-white border border-slate-100 rounded-xl p-4">
-                      {activeRegion.highlights.map((high, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-700 text-sm md:text-base">
-                          <Award className={`w-5 h-5 flex-shrink-0 mt-0.5 ${activeRegion.textColor}`} />
-                          <span>{high}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* SENAI Curricular Focus */}
-                  <div className="bg-slate-900 rounded-xl p-5 md:p-6 text-white shadow-inner mb-6">
-                    <h3 className="font-bold flex items-center gap-2 mb-3 text-slate-100">
-                      <BookOpen className="w-5 h-5 text-blue-400" /> Proposta Curricular SENAI (1.200h)
-                    </h3>
-                    <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-                      <span className="font-bold text-white uppercase tracking-wider text-xs block mb-1">Ajuste de Foco Regional:</span> 
-                      {activeRegion.senaiFocus}
-                    </p>
-                  </div>
-
-                  {/* Strategic Insight */}
-                  <div className={`rounded-xl p-5 md:p-6 border-l-4 shadow-sm ${activeRegion.color.replace('bg-', 'bg-').replace('50', '100')} ${activeRegion.color.split(' ')[1]}`}>
-                    <h3 className={`font-bold flex items-center gap-2 mb-2 ${activeRegion.textColor}`}>
-                      <Lightbulb className="w-5 h-5" /> Insight Comercial Estratégico
-                    </h3>
-                    <p className="text-slate-800 text-sm md:text-base leading-relaxed font-medium">
-                      {activeRegion.strategicInsight}
-                    </p>
+                  <div className="relative pl-8 md:pl-10">
+                    <div className="absolute -left-3 md:-left-[13px] top-0 bg-indigo-500 w-6 h-6 md:w-7 md:h-7 rounded-full border-4 border-white shadow-sm flex items-center justify-center">
+                      <span className="text-white text-[10px] font-bold">3</span>
+                    </div>
+                    <h3 className="font-extrabold text-xl text-slate-800 mb-2">Fase 3: Expansão Especializada</h3>
+                    <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                      <p className="text-slate-700 mb-2">
+                        <strong className="text-slate-900">Onde:</strong> Eixo Goiânia/Aparecida e Polos de Interiorização (Jataí/Catalão).
+                      </p>
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                        <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
+                        Após consolidar e ajustar a matriz curricular nas Fases 1 e 2, o SENAI avança para capturar a demanda de pesquisa metropolitana (Ceti-Saúde) e começa a faturar com formações corporativas (<Tooltip term="FICs" text="Cursos de Formação Inicial e Continuada. Trilhas curtas e modulares ideais para requalificar equipes que já atuam no campo sem afastá-las da rotina." />) customizadas diretamente dentro das biofábricas no interior.
+                      </p>
+                    </div>
                   </div>
 
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Execution Plan Section */}
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-          <div className="bg-slate-800 p-6 md:p-8 text-white">
-            <h2 className="text-2xl font-bold flex items-center gap-2 mb-3">
-              <ShieldCheck className="text-blue-400 w-7 h-7" /> Plano de Implantação Recomendado
-            </h2>
-            <p className="text-slate-300 max-w-4xl text-sm md:text-base">
-              A abertura de novas formações técnicas exige um planejamento cadenciado. Em vez de lançar turmas simultâneas em todo o estado, 
-              recomendamos uma estratégia de expansão em "ondas" (fases). Isso mitiga riscos financeiros iniciais e permite validar a aderência do currículo primeiro nos mercados mais urgentes, financiando a expansão posterior.
-            </p>
-          </div>
-          
-          <div className="p-6 md:p-10">
-            <div className="relative border-l-2 border-slate-200 ml-3 md:ml-6 space-y-10 pb-4">
-              
-              <div className="relative pl-8 md:pl-10">
-                <div className="absolute -left-3 md:-left-[13px] top-0 bg-blue-600 w-6 h-6 md:w-7 md:h-7 rounded-full border-4 border-white shadow-sm flex items-center justify-center">
-                  <span className="text-white text-[10px] font-bold">1</span>
-                </div>
-                <h3 className="font-extrabold text-xl text-slate-800 mb-2">Fase 1: A Turma Piloto Segura (Curto Prazo)</h3>
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                  <p className="text-slate-700 mb-2">
-                    <strong className="text-slate-900">Onde:</strong> Unidade de Anápolis.
-                  </p>
-                  <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                    <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
-                    É o ativo mercadológico mais maduro do estado. A formação terá absorção quase imediata pelo robusto parque industrial do DAIA. O currículo pode ser validado rapidamente com foco em processos regulados, controle de qualidade e rigorosas normas de biossegurança exigidas pela Anvisa.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="relative pl-8 md:pl-10">
-                <div className="absolute -left-3 md:-left-[13px] top-0 bg-emerald-500 w-6 h-6 md:w-7 md:h-7 rounded-full border-4 border-white shadow-sm flex items-center justify-center">
-                  <span className="text-white text-[10px] font-bold">2</span>
-                </div>
-                <h3 className="font-extrabold text-xl text-slate-800 mb-2">Fase 2: A Fronteira Agro (Médio Prazo)</h3>
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                  <p className="text-slate-700 mb-2">
-                    <strong className="text-slate-900">Onde:</strong> Unidade de Rio Verde.
-                  </p>
-                  <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                    <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
-                    Posiciona o SENAI como protagonista no centro da revolução da bioeconomia nacional. Dialoga diretamente com o Programa Estadual de Bioinsumos e atende à urgência dos produtores rurais na transição para defensivos biológicos e biometano.
-                  </p>
-                </div>
-              </div>
+          </main>
 
-              <div className="relative pl-8 md:pl-10">
-                <div className="absolute -left-3 md:-left-[13px] top-0 bg-indigo-500 w-6 h-6 md:w-7 md:h-7 rounded-full border-4 border-white shadow-sm flex items-center justify-center">
-                  <span className="text-white text-[10px] font-bold">3</span>
-                </div>
-                <h3 className="font-extrabold text-xl text-slate-800 mb-2">Fase 3: Expansão Especializada</h3>
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                  <p className="text-slate-700 mb-2">
-                    <strong className="text-slate-900">Onde:</strong> Eixo Goiânia/Aparecida e Polos de Interiorização (Jataí/Catalão).
-                  </p>
-                  <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                    <strong className="text-slate-900 block mb-1">Por que iniciar aqui?</strong> 
-                    Após consolidar e ajustar a matriz curricular nas Fases 1 e 2, o SENAI avança para capturar a demanda de pesquisa metropolitana (Ceti-Saúde) e começa a faturar com formações corporativas (<Tooltip term="FICs" text="Cursos de Formação Inicial e Continuada. Trilhas curtas e modulares ideais para requalificar equipes que já atuam no campo sem afastá-las da rotina." />) customizadas diretamente dentro das biofábricas no interior.
-                  </p>
-                </div>
-              </div>
-
+          <footer className="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center">
+            <div className="max-w-6xl mx-auto px-4">
+              <p className="mb-2 font-semibold text-slate-300">Inteligência Estratégica para o Desenvolvimento Profissional</p>
+              <p className="text-sm">Os dados apresentados são baseados em projeções do Novo Caged, IBGE, Codego e Mapa do Trabalho Industrial.</p>
+              <p className="text-xs mt-4 opacity-50">Painel Interativo Otimizado para Apresentações Executivas</p>
             </div>
-          </div>
+          </footer>
         </div>
+      );
+    }
 
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="mb-2 font-semibold text-slate-300">Inteligência Estratégica para o Desenvolvimento Profissional</p>
-          <p className="text-sm">Os dados apresentados são baseados em projeções do Novo Caged, IBGE, Codego e Mapa do Trabalho Industrial.</p>
-          <p className="text-xs mt-4 opacity-50">Painel Interativo Otimizado para Apresentações Executivas</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
+    // Inicialização do React
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<BiotecDashboard />);
+  </script>
+</body>
+</html>
